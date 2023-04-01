@@ -26,6 +26,18 @@ onMounted(() => {
     initTabs();
     initTooltips();
 })
+const navItems = ref([
+      {
+         link: '/',linkName:'Dashboard', icon:'mdi:view-dashboard'
+      },
+      {
+         link: '/employees',linkName:'Employees', icon:'mdi:account-group-outline'
+      },
+      {
+         link: '/users',linkName:'Users', icon:'mdi:account-group'
+      },
+     
+   ])
 </script>
 
 <template>
@@ -38,11 +50,12 @@ onMounted(() => {
 
 
 <aside id="cta-button-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
+   <!--Profile section-->
+   <ProfileDetails/>
+   <!---Nav Links-->
    <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
-      <ul class="space-y-2 font-medium">
-         <li>
-            <NavLink iconString="Dashboard" colorString="#F02C56" sizeString="30" />
-         </li>
+      <ul v-for="nav in navItems" :key="nav.link" class="space-y-2 font-medium">
+         <NavLink :linkName="nav.linkName" :icon="nav.icon" :link="nav.link"/>
       </ul>
    </div>
 </aside>
