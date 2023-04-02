@@ -1,5 +1,7 @@
 <script setup>
+const { $generalStore } = useNuxtApp()
 definePageMeta({ middleware: 'auth' })
+
 </script>
 
 <template>

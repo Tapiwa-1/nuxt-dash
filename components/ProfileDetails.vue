@@ -1,11 +1,23 @@
 <template>
-    
+
 <div class="w-full max-w-sm bg-transparent dark:bg-gray-800">
     <div class="flex justify-end px-4 pt-4">
         
     </div>
     <div class="flex flex-col items-center pb-10">
-        <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="https://picsum.photos/200" alt="Bonnie image"/>
+        <div
+            v-if="$userStore.id"
+            @click="$generalStore.isEditProfileOpen = !$generalStore.isEditProfileOpen"  
+            for="image" class="relative cursor-pointer">
+            <img 
+            class="rounded-full" 
+            width="95" 
+            src="https://picsum.photos/200"
+            >
+             <div class="absolute bottom-0 right-0 rounded-full bg-white shadow-xl border p-1 border-gray-300 inline-block w-[32px]">
+                <Icon name="ph:pencil-simple-line-bold" size="17" class="-mt-1 ml-0.5"/>
+            </div>
+        </div>
         <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">{{ $userStore.name }}</h5>
         <span class="text-sm text-gray-500 dark:text-gray-400">User Role</span>
         <div class="flex mt-4 space-x-3 md:mt-6">
@@ -20,9 +32,11 @@
 
 </template>
 <script setup>
-const { $userStore, $generalStore } = useNuxtApp()
+const { $userStore, $profileStore, $generalStore } = useNuxtApp()
 // const route = useRoute()
 const router = useRouter()
+
+
 
 const logout = () => {
     try {

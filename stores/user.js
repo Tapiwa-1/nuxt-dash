@@ -8,6 +8,7 @@ export const useUserStore = defineStore('user', {
   state: () => ({
     id: '',
     name: '',
+    email:'',
     bio: '',
     image: ''
   }),
@@ -41,8 +42,9 @@ export const useUserStore = defineStore('user', {
       
       this.$state.id = res.data[0].id
       this.$state.name = res.data[0].name
-      this.$state.bio = res.data[0].bio
-      this.$state.image = res.data[0].image
+      this.$state.email = res.data[0].email
+      // this.$state.bio = res.data[0].bio
+      // this.$state.image = res.data[0].image
     },
 
     // async updateUserImage(data) {
