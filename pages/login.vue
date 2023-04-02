@@ -1,9 +1,22 @@
 <script setup>
-    const form = ref({
-        email: '',
-        password: '',
-    
-    });
+   const { $userStore } = useNuxtApp()
+
+   const router = useRouter()
+
+    let email = ref(null)
+    let password = ref(null)
+    let errors = ref(null)
+    const login = async () => {
+        errors.value = null
+        try {
+            await $userStore.getTokens()
+            await $userStore.login(email.value, password.value)
+            await $userStore.getUser()
+            router.push('/')
+        } catch (error) {
+            errors.value = error.response.data.errors
+        }
+    }
 </script>
 <template>
 <section class="bg-gray-50 dark:bg-gray-900">
@@ -11,20 +24,20 @@
               <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                   Sign in to your account
               </h1>
-              <form class="space-y-4 md:space-y-6" action="#">
+              <form method="post" @submit.prevent="login" class="space-y-4 md:space-y-6" action="#">
                   <div>
                         <InputLabel for="email" value="Email" />
 
                         <TextInput
                             id="email"
                             type="email"
-                            v-model="form.email"
+                            v-model="email"
                             required
                             autofocus
                             autocomplete="username"
                         />
 
-                        <!-- <InputError class="mt-2" :message="form.errors.email" /> -->
+                        <InputError class="mt-2" :message="errors && errors.email ? errors.email[0] : ''"/>
                   </div>
                   <div>
                        <InputLabel for="password" value="Password" />
@@ -32,17 +45,17 @@
                         <TextInput
                             id="password"
                             type="password"
-                            v-model="form.password"
+                            v-model="password"
                             required
                            
                         />
 
-                        <!-- <InputError class="mt-2" :message="form.errors.email" /> -->
+                        <InputError class="mt-2" :message="errors && errors.password ? errors.password[0] : ''"/>
                   </div>
                   <div class="flex items-center justify-between">
                       <a href="#" class="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">Forgot password?</a>
                   </div>
-                    <PrimaryButton  >
+                    <PrimaryButton  @click="login()" >
                         Log in
                     </PrimaryButton>
                   <p class="text-sm font-light text-gray-500 dark:text-gray-400">
