@@ -24,7 +24,7 @@
               <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                   Sign in to your account
               </h1>
-              <form method="post" @submit.prevent="login" class="space-y-4 md:space-y-6" action="#">
+              <div class="space-y-4 md:space-y-6" >
                   <div>
                         <InputLabel for="email" value="Email" />
 
@@ -61,7 +61,7 @@
                   <p class="text-sm font-light text-gray-500 dark:text-gray-400">
                       Don’t have an account yet? <NuxtLink to="/register" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up</NuxtLink>
                   </p>
-              </form>
+              </div>
       </NuxtLayout>
 </section>
 </template>

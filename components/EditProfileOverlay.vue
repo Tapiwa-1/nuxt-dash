@@ -64,6 +64,7 @@
                                     inputType="text"
                                     max="30"
                                 />
+                            
                                 <div class="text-[11px] text-gray-500 mt-4">
                                     Usernames can only contain letters, numbers, underscores, and periods. 
                                     Changing your username will also change your profile link.
@@ -78,7 +79,6 @@
                         <div class="font-semibold text-[15px] sm:mb-0 mb-1 text-gray-700 sm:w-[160px] sm:text-left text-center">
                             Email
                         </div>
-                        {{  $userStore.name }}
                         <div class="flex items-center justify-center sm:-mt-6">
                             <div class="sm:w-[60%] w-full max-w-md">
                                 <TextInput 
@@ -150,7 +150,7 @@
                     </button>
                 </div>
             </div>
-            
+           
         </div>
     </div>
 </template>
@@ -161,7 +161,7 @@ import 'vue-advanced-cropper/dist/style.css';
 
 import { storeToRefs } from 'pinia';
 const { $userStore, $generalStore, $profileStore } = useNuxtApp()
-const { name, email, image } = storeToRefs($userStore)
+const { id ,name, email, image } = storeToRefs($userStore)
 
 // const route = useRoute()
 
@@ -176,6 +176,7 @@ let cropper = ref(null)
 let uploadedImage = ref(null)
 let userImage = ref(null)
 let userName = ref(null)
+let userEmail = ref(null)
 let isUpdated = ref(false)
 
 const getUploadedImage = (e) => {
