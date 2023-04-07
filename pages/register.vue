@@ -1,5 +1,5 @@
 <script setup>
-    const { $userStore } = useNuxtApp()
+    const { $userStore, $generalStore} = useNuxtApp()
     const router = useRouter()
     let name = ref(null)
     let email = ref(null)
@@ -8,6 +8,7 @@
     let errors = ref(null)
     const register = async () => {
         errors.value = null
+        $generalStore.isProcessing = true
         try {
             await $userStore.getTokens()
             await $userStore.register(
@@ -18,9 +19,11 @@
             )
             await $userStore.getUser()
             router.push('/');
+            $generalStore.isProcessing = false
         } catch (error) {
             console.log(error)
             errors.value = error.response.data.errors
+            $generalStore.isProcessing = false
         }
     }
 </script>

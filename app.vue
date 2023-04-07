@@ -4,7 +4,17 @@
 
 </template>
 <script setup>
-const { $generalStore } = useNuxtApp()
+const { $generalStore, $userStore } = useNuxtApp()
 
-$generalStore.hasSessionExpired();
+onMounted( async() =>{
+ isEditProfileOpen.value = false
+     try {
+        await $generalStore.hasSessionExpired()
+        if ($userStore.id) {
+            $userStore.getUser()
+        }
+    } catch (error) {
+        console.log(error)
+    }
+})
 </script>

@@ -1,5 +1,5 @@
 <script setup>
-   const { $userStore } = useNuxtApp()
+   const { $userStore, $generalStore} = useNuxtApp()
 
    const router = useRouter()
 
@@ -7,14 +7,17 @@
     let password = ref(null)
     let errors = ref(null)
     const login = async () => {
+        $generalStore.isProcessing = true
         errors.value = null
         try {
             await $userStore.getTokens()
             await $userStore.login(email.value, password.value)
             await $userStore.getUser()
             router.push('/')
+            $generalStore.isProcessing = false
         } catch (error) {
             errors.value = error.response.data.errors
+            $generalStore.isProcessing = false
         }
     }
 </script>
@@ -56,6 +59,7 @@
                       <a href="#" class="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">Forgot password?</a>
                   </div>
                     <PrimaryButton  @click="login()" >
+                       
                         Log in
                     </PrimaryButton>
                   <p class="text-sm font-light text-gray-500 dark:text-gray-400">

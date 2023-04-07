@@ -44,7 +44,7 @@ export const useUserStore = defineStore('user', {
       this.$state.name = res.data[0].name
       this.$state.email = res.data[0].email
       // this.$state.bio = res.data[0].bio
-      // this.$state.image = res.data[0].image
+      this.$state.image = res.data[0].image
     },
 
     // async updateUserImage(data) {
