@@ -32,7 +32,7 @@
                                 <img 
                                     class="rounded-full" 
                                     width="95" 
-                                    src="https://picsum.photos/200"
+                                    :src="$userStore.image"
                                 >
                                 <div class="absolute bottom-0 right-0 rounded-full bg-white shadow-xl border p-1 border-gray-300 inline-block w-[32px]">
                                     <Icon name="ph:pencil-simple-line-bold" size="17" class="-mt-1 ml-0.5"/>
@@ -194,13 +194,9 @@ const cropAndUpdateImage = async () => {
     data.append('top', coordinates.top || '')   
 
     try {
-        // await $userStore.updateUserImage(data)
-        // await $userStore.getUser()
-        // await $profileStore.getProfile(route.params.id)
-
-        // $generalStore.updateSideMenuImage($generalStore.suggested, $userStore)
-        // $generalStore.updateSideMenuImage($generalStore.following, $userStore)
-
+        await $userStore.updateUserImage(data)
+        await $userStore.getUser()
+    
         userImage.value = image.value
         uploadedImage.value = null
     } catch (error) {
