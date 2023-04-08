@@ -163,7 +163,7 @@ import { storeToRefs } from 'pinia';
 const { $userStore, $generalStore, $profileStore } = useNuxtApp()
 const { id ,name, email, image } = storeToRefs($userStore)
 
-// const route = useRoute()
+const route = useRoute()
 
 onMounted(() => {
     userName.value = name.value
@@ -204,36 +204,36 @@ const cropAndUpdateImage = async () => {
     }
 }
 
-// const updateUserInfo = async () => {
-//     try {
-//         await $userStore.updateUser(userName.value, userBio.value)
-//         await $userStore.getUser()
-//         await $profileStore.getProfile(route.params.id)
+const updateUserInfo = async () => {
+    try {
+        await $userStore.updateUser(userName.value, userEmail.value)
+        await $userStore.getUser()
+        // await $profileStore.getProfile(route.params.id)
 
-//         userName.value = name.value
-//         userBio.value = bio.value
+        userName.value = name.value
+        userEmail.value = email.value
 
-//         setTimeout(() => {
-//             $generalStore.isEditProfileOpen = false
-//         }, 100)
-//     } catch (error) {
-//         console.log(error)
-//     }
-// }
+        setTimeout(() => {
+            $generalStore.isEditProfileOpen = false
+        }, 100)
+    } catch (error) {
+        console.log(error)
+    }
+}
 
-// watch(() => userName.value, () => {
-//     if (!userName.value || userName.value === name.value) {
-//         isUpdated.value = false
-//     } else {
-//         isUpdated.value = true
-//     }
-// })
+watch(() => userName.value, () => {
+    if (!userName.value || userName.value === name.value) {
+        isUpdated.value = false
+    } else {
+        isUpdated.value = true
+    }
+})
 
-// watch(() => userBio.value, () => {
-//     if (!userName.value || userBio.value.length < 1) {
-//         isUpdated.value = false
-//     } else {
-//         isUpdated.value = true
-//     }
-// })
+watch(() => userEmail.value, () => {
+    if (!userName.value || userEmail.value.length < 1) {
+        isUpdated.value = false
+    } else {
+        isUpdated.value = true
+    }
+})
 </script>
