@@ -7,6 +7,7 @@ const $axios = axios().provide.axios
 export const useGeneralStore = defineStore('general', {
   state: () => ({
     isEditProfileOpen: false,
+    isShowUserProfileOpen: false,
     isBackUrl: "/",
     isProcessing: false,
    

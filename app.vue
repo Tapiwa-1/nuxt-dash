@@ -1,7 +1,7 @@
 <template>
   <NuxtPage/>
-   <EditProfileOverlay v-if="$generalStore.isEditProfileOpen"/>
-
+    <EditProfileOverlay v-if="$generalStore.isEditProfileOpen"/>
+    <ShowUserProfileOverlay v-if="$generalStore.isShowUserProfileOpen"/>
 </template>
 <script setup>
 const { $generalStore, $userStore } = useNuxtApp()
